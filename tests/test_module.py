@@ -20,11 +20,17 @@ VAL_B = 100
 class Module2(minitorch.Module):
     def __init__(self, extra=0):
         super().__init__()
+        self.module_c = Module3(100)
         self.parameter_a = minitorch.Parameter(VAL_A)
         self.parameter_b = minitorch.Parameter(VAL_B)
         self.non_parameter = 10
         for i in range(extra):
             self.add_parameter(f"extra_parameter_{i}", None)
+
+class Module3(minitorch.Module):
+    def __init__(self, extra=0):
+        super().__init__()
+        self.parameter_a = minitorch.Parameter(VAL_A+100)
 
 
 @pytest.mark.task0_4
@@ -35,10 +41,10 @@ def test_module():
     assert module.mode == "eval"
     module.train()
     assert module.mode == "train"
-    assert len(module.parameters()) == 2
+    assert len(module.parameters()) == 2 + 1
 
     module = Module2(10)
-    assert len(module.parameters()) == 12
+    assert len(module.parameters()) == 12 + 1
 
     module = Module2(5)
     named_parameters = module.named_parameters()
@@ -61,7 +67,7 @@ def test_stacked_module():
     assert module.module_a.mode == "train"
     assert module.module_b.mode == "train"
 
-    assert len(module.parameters()) == 1 + 7 + 12
+    assert len(module.parameters()) == 1 + 7 + 12 + 2
 
     named_parameters = module.named_parameters()
     assert named_parameters["parameter_a"].value == VAL
@@ -69,3 +75,5 @@ def test_stacked_module():
     assert named_parameters["module_a.parameter_b"].value == VAL_B
     assert named_parameters["module_b.parameter_a"].value == VAL_A
     assert named_parameters["module_b.parameter_b"].value == VAL_B
+    assert named_parameters["module_a.module_c.parameter_a"].value == VAL_A+100
+    assert named_parameters["module_b.module_c.parameter_a"].value == VAL_A+100

@@ -22,24 +22,32 @@ class Module:
 
     def train(self):
         "Set the mode of this module and all descendent modules to `train`."
-        # TODO: Implement for Task 0.4.
-        raise NotImplementedError('Need to implement for Task 0.4')
+        self.mode = "train"
+        for v in self.modules():
+            v.mode = "train"
 
     def eval(self):
         "Set the mode of this module and all descendent modules to `eval`."
-        # TODO: Implement for Task 0.4.
-        raise NotImplementedError('Need to implement for Task 0.4')
+        self.mode = "eval"
+        for v in self.modules():
+            v.mode = "eval"
 
     def named_parameters(self):
         """
         Collect all the parameters of this module and its descendents.
-
-
         Returns:
             dict: Each name (key) and :class:`Parameter` (value) under this module.
         """
-        # TODO: Implement for Task 0.4.
-        raise NotImplementedError('Need to implement for Task 0.4')
+        all_named_parameters = {}
+        for key, value in self.__dict__["_parameters"].items():
+            all_named_parameters[key] = value
+        
+        for name, v in self.__dict__["_modules"].items():
+            for key, value in v.named_parameters().items():
+                all_named_parameters[name+"."+key] = value
+
+        return all_named_parameters
+
 
     def parameters(self):
         return self.named_parameters().values()
