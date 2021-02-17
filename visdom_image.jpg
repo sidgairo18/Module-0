@@ -1,0 +1,54 @@
+<!--
+Copyright 2017-present, The Visdom Authors
+All rights reserved.
+This source code is licensed under the license found in the
+LICENSE file in the root directory of this source tree.
+-->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="favicon.png">
+<!-- Bootstrap & jQuery -->
+<link rel="stylesheet" href=/static/css/bootstrap.min.css?v=ec3bb52a00e176a7181d454dffaea219>
+<script src=/static/js/jquery.min.js?v=e071abda8fe61194711cfc2ab99fe104></script>
+<script src=/static/js/bootstrap.min.js?v=5869c96cc8f19086aee625d670d741f9></script>
+<link rel="stylesheet" href=/static/css/react-resizable-styles.css?v=9f91a8dbf4d8f7ef1399e625660405f4>
+<link rel="stylesheet" href=/static/css/react-grid-layout-styles.css?v=7dc8934d2f9ac5303b8f0bb1148152a0>
+<!-- Other deps -->
+<script src=/static/js/react-react.min.js?v=bca103da5b5404d93783ccf73e0e9d1e></script>
+<script src=/static/js/react-dom.min.js?v=950495cc51ccb90612cf0fe0bb44f8f3></script>
+<script src=/static/js/layout_bin_packer.js?v=6c46683ed70fbb1443caf3531243836d></script>
+<!-- Mathjax -->
+<script type='text/javascript' src=/static/js/mathjax/2.7.5/MathJax.js?v=c32a502b8b4a6bd6bad8ddb1b59e9e72></script>
+<script type='text/x-mathjax-config'>MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']], processEscapes: true}});</script>
+<script type='text/javascript' src=/static/js/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js?v=151537e3588ab41ce0782ae07386ff5b></script>
+<!-- Plotly -->
+<script src=/static/js/plotly-plotly.min.js?v=059f6ecfa3930aa0b85b6ef4591390e4></script>
+<!-- Custom styles for this template -->
+<script>
+// TODO: this is not great. Should probably be an endpoint with a JSON
+// response or the first thing the socket sends back.
+var ENV_LIST = [
+
+'main',
+
+];
+var ACTIVE_ENV = '';
+var USER = 'sid';
+var USE_POLLING = ('False' == 'True');
+// Plotly setup
+window.PLOTLYENV = window.PLOTLYENV || {};
+window.PLOTLYENV.BASE_URL = 'https://plot.ly';
+</script>
+<script src=/static/js/main.js?v=18b42df2929611f4f1fef0b4bab498f4></script>
+<link rel="stylesheet" href=/static/css/style.css?v=1124a317e40ef4dcbb8edf5a53418cee>
+<title>visdom</title>
+<!-- <link rel="icon" href="http://example.com/favicon.png"> -->
+</head>
+<body>
+<noscript>JS is required</noscript>
+<div id="app"></div>
+</body>
+</html>

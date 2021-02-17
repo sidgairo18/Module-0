@@ -11,3 +11,6 @@
 ```
 python run_tests.py
 ```
+
+## Visdom test image
+![Visdom Test](./visdom_image.jpg?raw=true "Visdom test")
